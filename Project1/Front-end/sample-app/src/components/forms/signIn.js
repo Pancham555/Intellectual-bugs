@@ -1,6 +1,8 @@
 import React from 'react'
 import Navbar from './../navbar/navbar'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 function signIn() {
     let Validation = () => {
@@ -48,7 +50,10 @@ function signIn() {
         }
 
         if (passwordWarn.textContent == "" && nameWarn.textContent == "") {
-            console.log('Proceed')
+            // console.log('Proceed')
+            document.querySelector("#name").value = ""
+            document.querySelector("#password").value = ""
+
         }
 
 
@@ -67,33 +72,34 @@ function signIn() {
     return (
         <div
             className='w-screen h-screen overflow-hidden'>
-            <motion.div
-                initial={{ marginTop: '-100vh' }}
-                animate={{ marginTop: 0 }}
-                transition={{ delay: 0.5, type: 'spring', stiffness: 250 }}
-            >
-                <Navbar />
-                <div className="flex justify-center">
 
-                    <form action="" className="text-sm shadow-2xl w-11/12 md:w-5/12 h-auto mt-16 mb-2 pb-5 rounded-2xl border-4 flex justify-center flex-col items-center">
-                        <div className="text-2xl my-5">Sign In</div>
+            <Navbar />
+            <div className="flex justify-center">
 
-                        <input type="text" name="" id="" className="my-4 w-3/4 outline-none border-b-2" placeholder="Your UserName" id="name" />
-                        <div className="text-red-500 text-xs" id="name-warn"></div>
+                <form action="" className="text-sm shadow-2xl w-11/12 md:w-5/12 h-auto mt-16 mb-2 pb-5 rounded-2xl border-4 flex justify-center flex-col items-center">
+                    <div className="text-2xl my-5">Sign In</div>
 
-                        <input type="password" name="" id="" className="my-4 w-3/4 outline-none border-b-2" placeholder="Your Password" id="password" />
-                        <div className="text-red-500 text-xs" id="password-warn"></div>
+                    <input type="text" name="" id="" className="my-4 w-3/4 outline-none border-b-2" placeholder="Your UserName" id="name" />
+                    <div className="text-red-500 text-xs" id="name-warn"></div>
 
-                        <div className="flex justify-between w-full px-16 pt-6 pb-4">
-                            <button type="button" className="text-xs md:text-sm border-2 border-black outline-none px-2 py-1 rounded-lg"
-                                onClick={Clear}>Clear All</button>
-                            <button type="button" className="text-xs md:text-sm border-2 border-black outline-none px-2 py-1 rounded-lg"
-                                onClick={Validation}
-                            >Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </motion.div>
+                    <input type="password" name="" id="" className="my-4 w-3/4 outline-none border-b-2" placeholder="Your Password" id="password" />
+                    <div className="text-red-500 text-xs" id="password-warn"></div>
+
+                    <div className="flex justify-between w-full px-16 pt-6 pb-4">
+                        <button type="button" className="text-xs md:text-sm border-2 border-black outline-none px-2 py-1 rounded-lg"
+                            onClick={Clear}>Clear All</button>
+                        <button type="button" className="text-xs md:text-sm border-2 border-black outline-none px-2 py-1 rounded-lg"
+                            onClick={Validation}
+                        >Submit</button>
+                    </div>
+                    <div className="">Didn't have an account ?
+                        <Link to='/signup'>
+                            <span className='text-blue-500'> Sign up </span>
+                        </Link>
+                    </div>
+                </form>
+            </div>
+
         </div>
     )
 }
