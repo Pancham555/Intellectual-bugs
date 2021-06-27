@@ -15,7 +15,7 @@ namespace TrainingLab.Controllers
     public class TestController : Controller
     {
         public static string path = "C:\\Users\\HIMANI\\Desktop\\Perspectify Internship\\Training Lab\\TraninngLab\\BackEnd";
-        SQLiteConnection con = new SQLiteConnection("Data Source="+path+"\\TrainingLab\\TrainingLab\\TrainingLabDB.db");
+        SQLiteConnection con = new SQLiteConnection("Data Source=D:\\React\\Perspectify\\Second (Group) project\\My files\\Project 1\\Project1\\BackEnd\\TrainingLab\\TrainingLab\\TrainingLab\\TrainingLabDB.db");
         SQLiteCommand cmd = new SQLiteCommand();
         SQLiteCommand cmdd = new SQLiteCommand();
         [HttpGet]

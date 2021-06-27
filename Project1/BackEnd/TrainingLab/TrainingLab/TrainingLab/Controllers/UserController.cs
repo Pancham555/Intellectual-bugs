@@ -17,7 +17,7 @@ namespace TrainingLab.Controllers
     public class UserController : ControllerBase
     {
         public static string path = "C:\\Users\\HIMANI\\Downloads";
-        SQLiteConnection con = new SQLiteConnection("Data Source=" + path + "\\TrainingLab\\TrainingLab\\TrainingLabDB.db");
+        SQLiteConnection con = new SQLiteConnection("Data Source=D:\\React\\Perspectify\\Second (Group) project\\My files\\Project 1\\Project1\\BackEnd\\TrainingLab\\TrainingLab\\TrainingLab\\TrainingLabDB.db");
         private readonly IJWTAuthenticationManager jWTAuthenticationManager;
 
         private readonly ILogger<UserController> _logger;

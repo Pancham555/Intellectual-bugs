@@ -146,3 +146,36 @@ C:\Users\HIMANI\Downloads\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\Traini
 C:\Users\HIMANI\Downloads\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.dll
 C:\Users\HIMANI\Downloads\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.pdb
 C:\Users\HIMANI\Downloads\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.genruntimeconfig.cache
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\appsettings.json
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\TrainingLab.exe
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\TrainingLab.deps.json
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\TrainingLab.runtimeconfig.json
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\TrainingLab.runtimeconfig.dev.json
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\TrainingLab.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\TrainingLab.pdb
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\System.Data.SQLite.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\SQLite.Interop.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\SQLite.Interop.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\SQLite.Interop.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\SQLite.Interop.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.csproj.AssemblyReference.cache
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.AssemblyInfoInputs.cache
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.AssemblyInfo.cs
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.csproj.CoreCompileInputs.cache
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.MvcApplicationPartsAssemblyInfo.cache
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\staticwebassets\TrainingLab.StaticWebAssets.Manifest.cache
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\staticwebassets\TrainingLab.StaticWebAssets.xml
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\scopedcss\bundle\TrainingLab.styles.css
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.RazorTargetAssemblyInfo.cache
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.csproj.CopyComplete
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.dll
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.pdb
+D:\React\Perspectify\Second (Group) project\My files\Project 1\Project1\BackEnd\TrainingLab\TrainingLab\TrainingLab\obj\Debug\netcoreapp3.1\TrainingLab.genruntimeconfig.cache
