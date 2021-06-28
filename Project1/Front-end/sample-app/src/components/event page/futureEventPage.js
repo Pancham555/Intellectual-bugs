@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 import { useHistory } from 'react-router-dom'
 
 
-function Eventpage() {
+function futureEventPage() {
     const history = useHistory()
 
     //getting data from API
@@ -64,12 +64,12 @@ function Eventpage() {
                 {/* The below code is of the main display page */}
 
 
-                <div className="text-center text-4xl mb-8 pt-4 text-white">List of all events below</div>
+                <div className="text-center text-4xl mb-8 pt-4 text-white">List of all future events</div>
 
                 <div className="my-2 flex justify-center items-center flex-col">
 
 
-                    {events.map(eve => {
+                    {/* {events.map(eve => {
                         return <div key={eve.id} className="w-10/12 h-auto bg-white flex flex-col rounded-lg m-4 shadow-2xl">
                             <iframe width="100%" height="380rem" src={eve.eventURL}
                                 title="YouTube video player" frameBorder="0" allow="accelerometer;
@@ -84,7 +84,25 @@ function Eventpage() {
                                 {eve.description}
                             </div>
                         </div>
-                    })}
+                    })} */}
+                    <div className="w-9/12 h-auto bg-gray-700 text-white flex flex-col rounded-lg m-4 shadow-2xl">
+                        <iframe width="100%" height="350rem" src="http://localhost:5500/videos/events/4.mp4"
+                            title="YouTube video player" frameBorder="0" allow="accelerometer;
+                             clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
+                            className='rounded-t-lg'></iframe>
+                        <div className="text-2xl text-center my-3">Heading</div>
+                        <div className="flex justify-between mx-5 my-2 text-xl">
+                            <div className="mx-5">Start : </div>
+                            <div className="mx-5">End : </div>
+                        </div>
+                        <div className="text-lg mx-5 mt-2 text-gray-300">
+                            description
+                        </div>
+                        <div className="flex justify-around my-10">
+                            <div className="text-xl border-2 border-red-400 px-8 py-3 rounded-lg cursor-pointer hover:bg-red-400 hover:text-white duration-200">Cancel</div>
+                            <div className="text-xl border-2 border-red-400 px-8 py-3 rounded-lg cursor-pointer hover:bg-red-400 hover:text-white duration-200">Book</div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -99,4 +117,4 @@ function Eventpage() {
     )
 }
 
-export default Eventpage
+export default futureEventPage

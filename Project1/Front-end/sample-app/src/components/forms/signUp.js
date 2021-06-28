@@ -3,9 +3,14 @@ import React from 'react'
 import Navbar from './../navbar/navbar'
 import { motion } from 'framer-motion'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+
 
 
 function signUp() {
+
+    const history = useHistory()
+
     let Validation = () => {
         //The below code is for name validation
 
@@ -24,10 +29,10 @@ function signUp() {
 
         //The below code is for e-mail validation
 
-        let eMail = document.querySelector("#e-mail").value
+        let emailId = document.querySelector("#e-mail").value
         let eMailWarn = document.querySelector("#e-mail-warn")
-        let emailVerify1 = eMail.includes("@")
-        if (eMail == "") {
+        let emailVerify1 = emailId.includes("@")
+        if (emailId == "") {
             eMailWarn.textContent = "E-mail cannot be empty"
         }
         else if (!emailVerify1) {
@@ -74,10 +79,10 @@ function signUp() {
 
         //The final submitting when everthing is fine
         let proceedWarn = document.querySelector("#proceed-warn")
-        const url = 'https://localhost:44356/'
+        const url = 'https://localhost:5001/user/signup'
         let details = {
             name: name,
-            eMail: eMail,
+            emailId: emailId,
             password: password1
         }
 
@@ -94,12 +99,12 @@ function signUp() {
             document.querySelector("#password").value = ""
             document.querySelector("#confirmPassword").value = ""
 
-            axios.post(url, {
-                details
-            }).then(res => {
-                console.log(res.data)
+            axios.post(url, details).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
             })
-            // window.location.replace('/courses');
+            history.push('/selection')
         }
         else {
             proceedWarn.textContent = "Please complete the form to continue"
@@ -160,9 +165,9 @@ function signUp() {
                     <div className="text-red-500 text-xs" id="proceed-warn"></div>
                 </form>
             </div>
-
         </div>
     )
 }
 
 export default signUp
+
