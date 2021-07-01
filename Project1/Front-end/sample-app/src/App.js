@@ -3,12 +3,10 @@ import './App.css'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  useHistory,
+  Route
 } from "react-router-dom";
 import FrontPage from './components/front page/frontPage'
 import EventPage from './components/event page/eventPage'
-import FutureEventPage from './components/event page/futureEventPage';
 import TestPage from './components/test page/testPage'
 import CoursePage from './components/courses page/coursesPage'
 import SignIn from './components/forms/signIn'
@@ -20,26 +18,19 @@ import Csharp from './components/courses page/Csharp';
 import Node from './components/courses page/Node';
 import Blender from './components/courses page/Blender'
 import MongoDB from './components/courses page/MongoDB'
-import Navbar from './components/navbar/navbar'
-import NavIcon from './components/navbar icons/navbarIcon'
+import TestSelectionPage from './components/test page/testSelectionPage'
 
 function App() {
-  const history = useHistory()
-
   return (
     <>
 
 
       <Switch>
-
         <Route exact path="/" component={FrontPage} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/courses" component={CoursePage} />
-
         <Route exact path='/events' component={EventPage} />
-        <Route exact path='/futureevent' component={FutureEventPage} />
-
         <Route exact path="/test" component={TestPage} />
         <Route exact path='/courses/react' component={ReactPage} />
         <Route exact path='/courses/angular' component={Angular} />
@@ -48,7 +39,11 @@ function App() {
         <Route exact path='/courses/blender' component={Blender} />
         <Route exact path='/courses/mongodb' component={MongoDB} />
         <Route exact path='/selection' component={SelectionPage} />
+        <Route exact path='/testselection' component={TestSelectionPage} />
       </Switch>
+      {/* <SignIn /> */}
+      {/* <SignUp /> */}
+      {/* <TestSelectionPage /> */}
     </>
   )
 }

@@ -14,169 +14,110 @@ namespace TrainingLab.Controllers
     [Route("[controller]")]
     public class CourseController : Controller
     {
-
-        public static string path;
+        public static string path = "C:\\Users\\HIMANI\\Desktop\\Perspectify Internship\\Training Lab\\Intellectual-bugs\\TrainingLab";
         SQLiteConnection con = new SQLiteConnection("Data Source=D:\\React\\Perspectify\\Second (Group) project\\My files\\Project 1\\Project1\\BackEnd\\TrainingLab\\TrainingLab\\TrainingLab\\TrainingLabDB.db");
-
-       // public static string path = "C:\\Users\\HIMANI\\Desktop\\Perspectify Internship\\Training Lab\\Intellectual-bugs\\TrainingLab";
-       // SQLiteConnection con = new SQLiteConnection("Data Source="+path+"\\TrainingLab\\TrainingLab\\TrainingLabDB.db");
-
         SQLiteCommand cmd = new SQLiteCommand();
         SQLiteCommand cmdd = new SQLiteCommand();
 
         [HttpGet]
-        public IEnumerable<CourseModel> GetCourses()
+        public IActionResult GetCourses(int id)
         {
             cmd.Connection = con;
             cmdd.Connection = con;
             con.Open();
-            cmd.CommandText = "select count(*) from Course";
-            SQLiteDataReader dr = cmd.ExecuteReader();
-            int size = 0;
-            if(dr.HasRows)
+            if (id > 0)
             {
-                while(dr.Read())
+                cmd.CommandText = "select Count(*) from Chapter where CourseId='" + id + "'";
+                SQLiteDataReader dr = cmd.ExecuteReader();
+                int totalChapters = 0;
+                if (dr.HasRows)
                 {
-                    size = dr.GetInt32(0);
+                    while (dr.Read())
+                    {
+                        totalChapters = dr.GetInt32(0);
+                    }
                 }
+                dr.Close();
+                ChapterModel[] chapterModel = new ChapterModel[totalChapters];
+                cmd.CommandText = "select * from Chapter where CourseId='" + id + "'";
+                dr = cmd.ExecuteReader();
+                int i = 0;
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        chapterModel[i] = new ChapterModel();
+                        chapterModel[i].chapterId = dr.GetInt32(0);
+                        chapterModel[i].chapterName = dr.GetString(1);
+                        //chapterModel[i].topics=GetTopics(chapterModel[i].chapterId);
+                        cmdd.CommandText = "select count(*) from Topic t inner join Chapter ch on ch.Id=t.ChapterId inner join Course c on c.Id=ch.CourseId where t.ChapterId='" + id + "'";
+                        SQLiteDataReader sQLiteDataReader = cmdd.ExecuteReader();
+                        int size = 0;
+                        if (sQLiteDataReader.HasRows)
+                        {
+                            while (sQLiteDataReader.Read())
+                            {
+                                size = sQLiteDataReader.GetInt32(0);
+                            }
+                        }
+                        sQLiteDataReader.Close();
+                        cmdd.CommandText = "select * from Topic t inner join Chapter ch on ch.Id=t.ChapterId inner join Course c on c.Id=ch.CourseId where t.ChapterId='" + chapterModel[i].chapterId + "'";
+                        sQLiteDataReader = cmdd.ExecuteReader();
+                        int j = 0;
+                        TopicModel[] topicModel = new TopicModel[size];
+                        if (sQLiteDataReader.HasRows)
+                        {
+                            while (sQLiteDataReader.Read())
+                            {
+                                topicModel[j] = new TopicModel();
+                                topicModel[j].TopicId = int.Parse(sQLiteDataReader["Id"].ToString());
+                                topicModel[j].TopicName = sQLiteDataReader["TopicName"].ToString();
+                                topicModel[j].VideoURL = sQLiteDataReader["VideoURL"].ToString();
+                                topicModel[j].NotesURL = sQLiteDataReader["NotesURL"].ToString();
+                                j++;
+                            }
+                        }
+                        chapterModel[i].topics = topicModel;
+                        sQLiteDataReader.Close();
+                        i++;
+                    }
+                }
+                return CreatedAtAction(nameof(GetCourses), chapterModel);
             }
-            
-            dr.Close();
-            cmd.CommandText = "select * from Course";
-            dr = cmd.ExecuteReader();
-            int i = 0;
-            CourseModel[] courseModel = new CourseModel[size];
-            
-            if(dr.HasRows)
+            else
             {
-                while(dr.Read())
+                cmd.CommandText = "select count(*) from Course";
+                SQLiteDataReader sQLiteDataReader = cmd.ExecuteReader();
+                int size = 0;
+                if (sQLiteDataReader.HasRows)
                 {
-                    courseModel[i] = new CourseModel();
-                    courseModel[i].CourseId= int.Parse(dr["Id"].ToString());
-                    courseModel[i].CourseName = dr["CourseName"].ToString();
-                    courseModel[i].AuthorName = dr["AuthorName"].ToString();
-                    courseModel[i].Chapters = getChapters(courseModel[i].CourseId);                   
-                    i++;
+                    while (sQLiteDataReader.Read())
+                    {
+                        size = sQLiteDataReader.GetInt32(0);
+                    }
                 }
+                sQLiteDataReader.Close();
+                cmd.CommandText = "select * from Course";
+                sQLiteDataReader = cmd.ExecuteReader();
+                int i = 0;
+                CourseModel[] courseModel = new CourseModel[size];
+
+                if (sQLiteDataReader.HasRows)
+                {
+                    while (sQLiteDataReader.Read())
+                    {
+                        courseModel[i] = new CourseModel();
+                        courseModel[i].CourseId = int.Parse(sQLiteDataReader["Id"].ToString());
+                        courseModel[i].CourseName = sQLiteDataReader["CourseName"].ToString();
+                        courseModel[i].AuthorName = sQLiteDataReader["AuthorName"].ToString();
+                        courseModel[i].imageURL = sQLiteDataReader["ImageURL"].ToString();
+                        i++;
+                    }
+                }
+                sQLiteDataReader.Close();
+                con.Close();
+                return CreatedAtAction(nameof(GetCourses), courseModel);
             }
-            dr.Close();
-            con.Close();
-            return courseModel;
         }
-        public string getChapters(int id)
-        {
-            StringBuilder sb = new StringBuilder();
-            cmdd.CommandText = "select * from Chapter where CourseId='" + id+ "'";
-            SQLiteDataReader drr = cmdd.ExecuteReader();
-            sb.Append("{");
-            int j = 0;
-            if (drr.HasRows)
-            {
-                while (drr.Read())
-                {
-                    if (j != 0)
-                        sb.Append(",");
-                    sb.Append(drr["ChapterName"].ToString());
-                    j++;
-                }
-            }
-            sb.Append("}");
-            drr.Close();
-            return sb.ToString();
-        }
-        [HttpGet("chapter")]
-        public IEnumerable<ChapterModel> GetChapters([FromQuery] string course)
-        {
-            cmd.Connection = con;
-            cmdd.Connection = con;
-            con.Open();
-            cmd.CommandText = "select count(*) from Chapter ch inner join Course c on c.Id=ch.CourseId where c.CourseName='" + course + "'";
-            SQLiteDataReader dr = cmd.ExecuteReader();
-            int size = 0;
-            if (dr.HasRows)
-            {
-                while (dr.Read())
-                {
-                    size = dr.GetInt32(0);
-                }
-            }
-            dr.Close();
-            cmd.CommandText = "select * from Chapter ch inner join Course c on c.Id=ch.CourseId where c.CourseName='"+course+"'";
-            dr = cmd.ExecuteReader();
-            int i = 0;
-            ChapterModel[] chapterModel = new ChapterModel[size];           
-            if (dr.HasRows)
-            {
-                while (dr.Read())
-                {
-                    chapterModel[i] = new ChapterModel();
-                    chapterModel[i].ChapterId= int.Parse(dr["Id"].ToString());                   
-                    chapterModel[i].Topics = getTopics(chapterModel[i].ChapterId);                   
-                    i++;
-                }
-            }
-            dr.Close();
-            con.Close();
-            return chapterModel;
-        }
-        public string getTopics(int id)
-        {
-            StringBuilder sb = new StringBuilder();
-            cmdd.CommandText = "select * from Topic where ChapterId='" + id + "'";
-            SQLiteDataReader drr = cmdd.ExecuteReader();
-            sb.Append("{");
-            int j = 0;
-            if (drr.HasRows)
-            {
-                while (drr.Read())
-                {
-                    if (j != 0)
-                        sb.Append(",");
-                    sb.Append(drr["TopicName"].ToString());
-                    j++;
-                }
-            }
-            sb.Append("}");
-            drr.Close();
-            return sb.ToString();
-        }
-        [HttpGet("topic")]
-        public IEnumerable<TopicModel> GetTopics([FromQuery] string course,[FromQuery] string chapter)
-        {
-            cmd.Connection = con;
-            cmdd.Connection = con;
-            con.Open();
-            cmd.CommandText = "select count(*) from Topic t inner join Chapter ch on ch.Id=t.ChapterId inner join Course c on c.Id=ch.CourseId where c.CourseName='" + course + "' and ch.ChapterName='" + chapter + "'";
-            SQLiteDataReader dr = cmd.ExecuteReader();
-            int size = 0;
-            if (dr.HasRows)
-            {
-                while (dr.Read())
-                {
-                    size = dr.GetInt32(0);
-                }
-            }
-            dr.Close();
-            cmd.CommandText = "select * from Topic t inner join Chapter ch on ch.Id=t.ChapterId inner join Course c on c.Id=ch.CourseId where c.CourseName='" + course + "' and ch.ChapterName='"+chapter+"'";
-            dr = cmd.ExecuteReader();
-            int i = 0;
-            TopicModel[] topicModel = new TopicModel[size];
-            if (dr.HasRows)
-            {
-                while (dr.Read())
-                {
-                    topicModel[i] = new TopicModel();
-                    topicModel[i].TopicId= int.Parse(dr["Id"].ToString());
-                    topicModel[i].TopicName = dr["TopicName"].ToString();
-                    topicModel[i].VideoURL = dr["VideoURL"].ToString();
-                    topicModel[i].NotesURL = dr["NotesURL"].ToString();
-                    i++;
-                }
-            }
-            dr.Close();
-            con.Close();
-            return topicModel;
-        }
-       
     }
 }

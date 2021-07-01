@@ -7,10 +7,11 @@ import NavIcon from './../navbar icons/navbarIcon'
 import { motion } from 'framer-motion'
 import Navbar from './../navbar/navbar'
 import { Link } from 'react-router-dom'
+import Footer from './../footer/footer'
 
 function SelectionPage() {
     return (
-        <div className="absolute overflow-x-hidden w-screen h-full bg-blue-300">
+        <div className="relative w-full h-full bg-blue-300">
 
             {/* <img src={BackImage} alt="" className='absolute top-0 bottom-0 left-0 right-0 w-screen h-screen mx-auto mt-0 z-0' /> */}
 
@@ -18,8 +19,8 @@ function SelectionPage() {
                 <NavIcon />
             </Navbar>
 
-            <div className=" mt-48 w-full text-2xl absolute top-0 bottom-0 flex
-             flex-wrap justify-center z-20">
+            <div className="md:mt-16 mt-12 w-full text-2xl top-0 bottom-0 flex
+             flex-wrap justify-center z-20 py-6">
 
                 <Link to='/courses'>
                     <motion.div
@@ -31,7 +32,7 @@ function SelectionPage() {
                     </motion.div>
                 </Link>
 
-                <Link to='/test'>
+                <Link to='/testselection'>
                     <motion.div
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -52,6 +53,7 @@ function SelectionPage() {
                 </Link>
 
             </div>
+            <Footer />
         </div>
     )
 }

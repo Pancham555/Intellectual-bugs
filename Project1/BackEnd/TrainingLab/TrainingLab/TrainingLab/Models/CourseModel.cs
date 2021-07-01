@@ -11,5 +11,6 @@ namespace TrainingLab.Models
         public string CourseName { get; set; }
         public string AuthorName { get; set; }
         public string Chapters { get; set; }
+        public string imageURL { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace TrainingLab.Controllers
             }
             else
             {
-                cmd.CommandText = "select count(*) from Event";
+                cmd.CommandText = "select count(*) from Event where StartTime<'" + System.DateTime.UtcNow.AddHours(5.50) + "'";
                 dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
@@ -59,7 +59,7 @@ namespace TrainingLab.Controllers
                 }
 
                 dr.Close();
-                cmd.CommandText = "select * from Event";
+                cmd.CommandText = "select * from Event where StartTime<'" + System.DateTime.UtcNow.AddHours(5.50) + "'";
             }
             dr = cmd.ExecuteReader();
             EventModel[] eventModel = new EventModel[size];

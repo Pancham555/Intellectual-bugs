@@ -7,8 +7,9 @@ namespace TrainingLab.Models
 {
     public class ChapterModel
     {
-        public int ChapterId { get; set; }
+        public int chapterId { get; set; }
+        public string chapterName { get; set; }
+        public TopicModel[] topics { get; set; }
 
-        public string Topics { get; set; }
     }
 }
