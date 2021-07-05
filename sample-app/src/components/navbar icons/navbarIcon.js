@@ -52,7 +52,7 @@ function navbarIcon() {
                 initial={{ width: 0, height: "100%" }}
                 animate={{ width: nav ? "64%" : 0, height: "100%" }}
                 transition={{ duration: 0.15 }}
-                className="flex flex-col md:hidden fixed top-0 right-0 bg-blue-500 z-20 w-0 h-0 overflow-hidden shadow-2xl text-white">
+                className="flex flex-col md:hidden fixed top-0 right-0 bg-blue-400 z-20 w-0 h-0 overflow-hidden shadow-2xl rounded-l-xl text-white">
 
                 <motion.div
                     initial={{ marginTop: '100vh', opacity: 0 }}

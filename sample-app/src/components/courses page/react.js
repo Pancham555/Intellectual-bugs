@@ -1,3 +1,8 @@
+
+
+
+
+
 import React, { useState, useEffect } from 'react'
 import ReactPlayer from 'react-player'
 import Navbar from '../navbar/navbar'
@@ -21,29 +26,28 @@ const ReactPage = () => {
 
     const url = "https://localhost:5001/";
 
-    const getEvents = () => {
+    const getReact = () => {
         axios.get(`${url}course?id=1`)
             .then((response) => {
-                const allEvents = response.data;
-                setEvents(allEvents);
-                // console.log(allEvents[0].topics[2].topicName)
+                const allReact = response.data;
+                console.log(allReact)
+                console.log(allReact[0].topics[1].topicName)
+                setReactCourses(allReact);
             }).catch(error => console.log(`Error : ${error}`))
     }
 
     useEffect(() => {
-        getEvents()
+        getReact()
     }, []);
 
-    const [events, setEvents] = useState([]);
+    const [reactCourses, setReactCourses] = useState([]);
 
-    const [video, setVideo] = useState('http://localhost:5500/videos/courses/React/1.mp4')
-
-
-    const [expander, setExpander] = useState(false)
+    const [video, setVideo] = useState('http://localhost:5500/videos/courses/React/Introduction/introduction.mp4')
 
 
 
     return (
+
         <div>
 
             <Navbar>
@@ -66,12 +70,12 @@ const ReactPage = () => {
                         className="flex flex-col justify-center" >
                         <div className="my-5 text-white text-2xl text-center">Hello, Pancham</div>
                         {/* {
-                            events.map((props) => {
+                            reactCourses.map((react) => {
                                 return (
 
                                     <p className=" pl-5 my-4 pb-3 cursor-pointer border-b-2
                                     text-white border-gray-300"key={props.topicId}
-                                        onClick={() => setVideo(props.videoURL)}>{props.topicName}</p>
+                                        onClick={() => setVideo(props.videoURL)}>{react.topicName}</p>
                                 )
                             })
                         } */}
@@ -84,7 +88,7 @@ const ReactPage = () => {
 
                 <div className="flex justify-center items-center flex-col mx-10">
 
-                    <div className=" w-full md:mx-auto mx-10 h-full z-10 flex justify-center">
+                    <div className=" w-3/4 md:mx-auto mx-10 h-full z-10 flex justify-center border-2">
                         <ReactPlayer controls width='100%' height="400px" url={video} />
                     </div>
                     <div className="mt-10">
@@ -94,19 +98,26 @@ const ReactPage = () => {
                 </div>
 
                 <div className="border-4 rounded-xl py-10 px-5 w-4/12 h-auto  border-gray-400 hidden md:block" >
+                    {
+                        reactCourses.map((react, headIndex) => {
+                            return (
+                                <select key={headIndex} defaultValue='heading' className='duration-200 w-full border-b-2 font-semibold p-2 text-lg' onClick={(e) => setVideo(e.target.value)}>
+                                    <option value="heading">
+                                        {react.chapterName}(Heading)
+                                    </option>
+                                    {
+                                        react.topics.map((reactTopic, childIndex) => {
+                                            return (
+                                                <option key={childIndex} value={reactTopic.videoURL}>
+                                                    {reactTopic.topicName}
+                                                </option>
+                                            )
+                                        })
+                                    }
+                                </select>
 
-                    <p className='text-xl border-b-2 border-gray-300 flex cursor-pointer pt-6 pb-1.5'>
-                        <img src={Play} alt="" className='w-7 h-7 mx-5' />
-                        <span className=' font-semibold'>Play 1</span>
-                    </p>
-                    <p className='text-xl border-b-2 border-gray-300 flex cursor-pointer pt-6 pb-1.5'>
-                        <img src={Play} alt="" className='w-7 h-7 mx-5' />
-                        <span className=' font-semibold'>Play 2</span>
-                    </p>
-                    <p className='text-xl border-b-2 border-gray-300 flex cursor-pointer pt-6 pb-1.5'>
-                        <img src={Play} alt="" className='w-7 h-7 mx-5' />
-                        <span className=' font-semibold'>Play 3</span>
-                    </p>
+                            )
+                        })}
                 </div>
 
             </div>
@@ -115,4 +126,5 @@ const ReactPage = () => {
     )
 }
 export default ReactPage
-//[{"chapterId":1,"chapterName":"Introduction","topics":[{"topicId":1,"topicName":"Introduction","videoURL":"http://localhost:5500/videos/courses/React/1.mp4","notesURL":"abc"},{"topicId":2,"topicName":"What is React","videoURL":"http://localhost:5500/videos/courses/React/2.mp4","notesURL":"def"},{"topicId":3,"topicName":"Why should we choose React?","videoURL":"http://localhost:5500/videos/courses/React/3.mp4","notesURL":"null"}]},{"chapterId":2,"chapterName":"React Basic","topics":[{"topicId":4,
+
+
