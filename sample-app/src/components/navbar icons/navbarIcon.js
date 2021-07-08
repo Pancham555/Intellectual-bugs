@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import notification from './../../assets/notification.png'
 import { motion } from 'framer-motion'
 
-function navbarIcon() {
+function navbarIcon(props) {
     let notificationCount = 211
     let conditioner = '/events'
     const [nav, openNav] = useState(false)
@@ -19,14 +19,14 @@ function navbarIcon() {
 
         <div className="flex justify-between w-full">
 
-            <div className=" my-auto text-sm md:flex hidden font-semibold lg:text-lg">
-                <Link to='/courses'>
-                    <p className="p-1 mx-1 cursor-pointer text-white ">
+            <div className=" my-auto text-sm md:flex hidden font-semibold lg:text-lg text-white">
+                <Link to='/courses' className={props.colorA}>
+                    <p className="p-1 mx-1 cursor-pointer">
                         Courses</p></Link>
-                <Link to='/testselection'>
-                    <p className="p-1 mx-1 cursor-pointer text-white ">Test</p></Link>
-                <Link to='/events'>
-                    <p className="p-1 mx-1 cursor-pointer text-white ">
+                <Link to='/testselection' className={props.colorB}>
+                    <p className="p-1 mx-1 cursor-pointer">Test</p></Link>
+                <Link to='/events' className={props.colorC}>
+                    <p className="p-1 mx-1 cursor-pointer">
                         Events</p></Link>
             </div>
 
@@ -52,7 +52,7 @@ function navbarIcon() {
                 initial={{ width: 0, height: "100%" }}
                 animate={{ width: nav ? "64%" : 0, height: "100%" }}
                 transition={{ duration: 0.15 }}
-                className="flex flex-col md:hidden fixed top-0 right-0 bg-blue-400 z-20 w-0 h-0 overflow-hidden shadow-2xl rounded-l-xl text-white">
+                className="flex flex-col md:hidden fixed top-0 right-0 bg-gradient-to-br from-blue-500   to-purple-500  z-20 w-0 h-0 overflow-hidden shadow-2xl text-white">
 
                 <motion.div
                     initial={{ marginTop: '100vh', opacity: 0 }}
@@ -60,18 +60,18 @@ function navbarIcon() {
                     transition={{ duration: 0.6 }}
 
                     className="flex flex-col justify-center" >
-                    <div className="mt-16 md:text-2xl text-xl border-b-2 pb-3 text-center">Hello,Pancham</div>
+                    <div className="mt-16 md:text-2xl text-xl pb-3 text-center">Hello,Pancham</div>
 
                     {/* <div className="mt-5 border-t-2 border-b-2 p-3">These are all the pages</div> */}
 
-                    <Link to='/courses'>
-                        <p className="px-2 py-4 mx-1 cursor-pointer border-b-2">Courses</p>
+                    <Link to='/courses' className={props.colorSecA}>
+                        <p className="px-2 py-4 mx-1 cursor-pointer  text-xl">Courses</p>
                     </Link>
-                    <Link to='/testselection'>
-                        <p className="px-2 py-4 mx-1 cursor-pointer border-b-2">Test</p>
+                    <Link to='/testselection' className={props.colorSecB}>
+                        <p className="px-2 py-4 mx-1 cursor-pointer  text-xl">Test</p>
                     </Link>
-                    <Link to='/events'>
-                        <p className="px-2 py-4 mx-1 cursor-pointer border-b-2">Events</p>
+                    <Link to='/events' className={props.colorSecC}>
+                        <p className="px-2 py-4 mx-1 cursor-pointer  text-xl">Events</p>
                     </Link>
 
 

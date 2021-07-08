@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import './../../App.css'
+import Share from './../../assets/share.png'
 import Navbar from './../navbar/navbar'
 import NavIcon from './../navbar icons/navbarIcon'
+import Accordion from './../courses page/Course components/Accordion'
 import Footer from './../footer/footer'
 import { motion } from 'framer-motion'
 import { auto } from 'async'
@@ -44,10 +46,11 @@ function EventPage() {
     }, [pastEvent, events, futureEvents]);
 
 
+
     return (
         <div>
             <Navbar>
-                <NavIcon />
+                <NavIcon colorC="text-black" colorSecC='text-black font-semibold' />
             </Navbar>
             <div className="sticky top-0 left-0 right-0 bg-blue-400 flex text-center text-xl text-white">
                 <div className="w-1/2 border-r-2 py-2 cursor-pointer" onClick={() => futureEvent(true)}>Past Events</div>
@@ -57,6 +60,13 @@ function EventPage() {
 
                 {(pastEvent) ?
                     events.map((props) => {
+                        const Booking = () => {
+                            alert("Your ticket is booked")
+                            //sending part goes here
+                        }
+                        const Sharer = () => {
+                            alert("Share this event using the link 👉 http://localhost:3000/events")
+                        }
                         return (
                             <div key={props.eventId} className="w-96 rounded-md border-2 h-full relative m-4 flex flex-col justify-between">
                                 <div>
@@ -67,7 +77,9 @@ function EventPage() {
                                                 <span className='text-gray-500 my-1'>Ended on {props.endTime}</span>
                                             </div>
                                         </div>
-                                        <div className="font-extrabold cursor-pointer text-2xl text-gray-400 mx-2">⋮</div>
+                                        <div className="font-extrabold cursor-pointer text-2xl text-gray-400 mx-2">
+                                            <img src={Share} alt="" className='w-4 h-4 my-2' onClick={Sharer} />
+                                        </div>
                                     </div>
 
                                     <iframe src={props.eventURL} frameBorder="0" className='w-full h-44' allowFullScreen></iframe>
@@ -75,24 +87,23 @@ function EventPage() {
                                     <div className="m-2 text-gray-500">{props.description}</div>
                                 </div>
                                 <div className=" mt-5 mb-2 text-gray-500 mx-5 flex justify-between">
-                                    <div className=""></div>
-                                    <motion.div
-                                        initial={{ height: "1.5rem" }}
-                                        whileTap={{ height: "auto" }}
-                                        transition={{ type: 'tween', duration: 0.3 }}
-                                        className="flex flex-col mystyle h-auto">
-                                        <div className="flex justify-between w-20 cursor-pointer">
-                                            <span>Panalists</span><span>▼</span>
-                                        </div>
-                                        <div className="bg-white rounded-lg overflow-hidden">
-                                            <div className=" border-2">
-                                                <div className="p-2">{props.panelists}</div>
-                                                <div className="p-2">{props.panelists}</div>
-                                                <div className="p-2">{props.panelists}</div>
-                                            </div>
-                                        </div>
-                                    </motion.div>
+                                    <div className="my-auto">Participants : {props.attendee}</div>
+
+                                    <Accordion heading="Panelists">
+                                        {props.panelists.map((prom, num) => {
+                                            return (
+                                                <div key={num} className="py-1 px-2">{prom}</div>
+                                            )
+                                        })}
+                                    </Accordion>
+
                                 </div>
+                                <motion.div
+                                    whileTap={{ scale: 0.95 }}
+                                    transition={{ type: "tween" }}
+                                    className="bg-blue-500 text-white rounded-3xl text-center text-xl
+                                    p-2 m-5 cursor-pointer"onClick={Booking}>Attend
+                                </motion.div>
                             </div>
                         )
                     })
@@ -100,6 +111,16 @@ function EventPage() {
                     :
 
                     futureEvents.map((props) => {
+                        let add = 0
+                        const Booking = () => {
+                            alert("Your ticket is booked")
+                            console.log(props.eventId)
+                            //sending part goes here
+                        }
+                        const Sharer = () => {
+                            alert("Share this event using the link 👉 http://localhost:3000/events")
+                        }
+
                         return (
                             <div key={props.eventId} className="w-96 rounded-md border-2 h-full relative m-4 flex flex-col justify-between">
                                 <div>
@@ -109,7 +130,9 @@ function EventPage() {
                                                 <span className='text-gray-500 my-1'>Starts in {props.startTime}</span>
                                             </div>
                                         </div>
-                                        <div className="font-extrabold cursor-pointer text-2xl text-gray-500 mx-2" >⋮</div>
+                                        <div className="font-extrabold cursor-pointer text-2xl text-gray-500 mx-2" >
+                                            <img src={Share} alt="" className='w-4 h-4 my-2' onClick={Sharer} />
+                                        </div>
                                     </div>
 
                                     <div className="w-full h-44 bg-purple-600 text-white flex flex-col justify-center">
@@ -119,22 +142,24 @@ function EventPage() {
                                     <div className="m-2 text-gray-500">{props.description}</div>
                                 </div>
                                 <div className=" mt-5 mb-2 text-gray-500 mx-5 flex justify-between">
-                                    <div className=""></div>
-                                    <motion.div
-                                        initial={{ height: "1.5rem" }}
-                                        whileTap={{ height: "auto" }}
-                                        transition={{ type: 'tween', duration: 0.3 }}
-                                        className="flex flex-col mystyle h-auto">
-                                        <div className="flex justify-between w-20 cursor-pointer">
-                                            <span>Panalists</span><span>▼</span>
-                                        </div>
-                                        <div className="bg-white rounded-lg overflow-hidden">
-                                            <div className=" border-2">
-                                                <div className="p-2">{props.panelists}</div>
-                                            </div>
-                                        </div>
-                                    </motion.div>
+                                    <div className="my-auto">Participants : {props.attendee + add}</div>
+
+
+                                    <Accordion heading="Panelists">
+                                        {props.panelists.map((prom, num) => {
+                                            return (
+                                                <div key={num} className="py-1 px-2">{prom}</div>
+                                            )
+                                        })}
+                                    </Accordion>
+
                                 </div>
+                                <motion.div
+                                    whileTap={{ scale: 0.95 }}
+                                    transition={{ type: "tween" }}
+                                    className="bg-blue-500 text-white rounded-3xl text-center text-xl
+                                    p-2 m-5 cursor-pointer" onClick={Booking}>Attend
+                                </motion.div>
                             </div>
                         )
                     })

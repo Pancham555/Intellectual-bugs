@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import './../../App.css'
 // import { Redirect, Route } from 'react-router-dom'
 import Navbar from './../navbar/navbar'
@@ -27,53 +27,58 @@ function CoursesPage() {
         },
         {
             id: 2,
-            name: "c#",
-            location: '/courses/csharp',
-            image: CSharpImage
+            name: "Angular",
+            location: '/courses/angular',
+            image: AngularImage
         },
         {
             id: 3,
+            name: "Nodejs",
+            location: '/courses/node',
+            image: NodejsImage
+        },
+        {
+            id: 4,
             name: "Blender",
             location: '/courses/blender',
             image: BlenderImage
         },
         {
-            id: 4,
+            id: 5,
             name: "MongoDB",
             location: '/courses/mongodb',
             image: MongoDBImage
-        },
-        {
-            id: 5,
-            name: "Node js",
-            location: '/courses/node',
-            image: NodejsImage
         }, ,
         {
             id: 6,
-            name: "Angular",
-            location: '/courses/angular',
-            image: AngularImage
+            name: "C#",
+            location: '/courses/csharp',
+            image: CSharpImage
         }
     ]
 
     const history = useHistory();
+    const [num, setNum] = useState(0)
 
     return (
         <div className='relative top-0 right-0 left-0 bottom-0 bg-blue-300 '>
             <Navbar>
-                <NavIcon />
+                <NavIcon colorA="text-black" colorSecA='text-black font-semibold' />
             </Navbar>
 
             <div className="flex flex-wrap justify-center items-center bg-transparent z-10 p-5">
                 {courses.map(course => {
+                    const pusher = () => {
+                        history.push(course.location)
+                        setNum(course.id)
+                    }
                     return (
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             key={course.id}
                             className="m-3 bg-white min-w-min w-80 h-60 rounded-2xl cursor-pointer flex flex-col shadow-2xl"
-                            onClick={() => history.push(course.location)}
+                            onClick={pusher}
                         >
                             <img src={course.image} alt="" className='rounded-t-2xl h-3/5 border-b-2' />
                             <div className=" text-center text-2xl my-5">{course.name}</div>

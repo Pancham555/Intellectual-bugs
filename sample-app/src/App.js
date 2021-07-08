@@ -19,6 +19,7 @@ import Node from './components/courses page/Node';
 import Blender from './components/courses page/Blender'
 import MongoDB from './components/courses page/MongoDB'
 import TestSelectionPage from './components/test page/testSelectionPage'
+import Accordion from './components/courses page/Course components/Accordion'
 
 function App() {
   return (
@@ -41,9 +42,6 @@ function App() {
         <Route exact path='/selection' component={SelectionPage} />
         <Route exact path='/testselection' component={TestSelectionPage} />
       </Switch>
-      {/* <TestSelectionPage /> */}
-      {/* Test your skill */}
-      {/* <TestPage /> */}
     </>
   )
 }

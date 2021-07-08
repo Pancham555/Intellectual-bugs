@@ -1,19 +1,26 @@
-
-
-
-
-
 import React, { useState, useEffect } from 'react'
 import ReactPlayer from 'react-player'
 import Navbar from '../navbar/navbar'
 import { motion } from 'framer-motion'
 import NavIcon from './../navbar icons/navbarIcon'
+import Accordion from './Course components/Accordion'
 import Play from './../../assets/play-button.png'
 import Footer from './../footer/footer'
 import axios from 'axios'
 import './../../App.css'
 
 const ReactPage = () => {
+    const style = {
+        width: "36rem",
+        height: "20rem",
+        color: "red",
+        fontWeight: "bold",
+        fontSize: "2rem"
+    }
+    const styleSec = {
+        fontSize: "2rem",
+        fontWeight: "bolder"
+    }
     const [nav, openNav] = useState(false)
     const changer = () => {
         if (nav) {
@@ -25,9 +32,10 @@ const ReactPage = () => {
     }
 
     const url = "https://localhost:5001/";
+    // const [num, setNum] = useState(1)
 
     const getReact = () => {
-        axios.get(`${url}course?id=1`)
+        axios.get(`${url}course?id=${1}`)
             .then((response) => {
                 const allReact = response.data;
                 console.log(allReact)
@@ -35,6 +43,7 @@ const ReactPage = () => {
                 setReactCourses(allReact);
             }).catch(error => console.log(`Error : ${error}`))
     }
+
 
     useEffect(() => {
         getReact()
@@ -44,15 +53,16 @@ const ReactPage = () => {
 
     const [video, setVideo] = useState('http://localhost:5500/videos/courses/React/Introduction/introduction.mp4')
 
-
+    const [notes, setNotes] = useState("Your notes goes here.This is a dummy text, and it's sole purpose is to show you where your notes will be placed")
 
     return (
 
         <div>
 
             <Navbar>
-                <NavIcon />
+                <NavIcon colorA="text-black" colorSecA='text-black font-semibold' />
             </Navbar>
+            {/* <button onClick={() => setNum(3)}>Change course</button> */}
 
             <div className="flex md:justify-between justify-center flex-col md:flex-row bg-no-repeat bg-cover mt-0 md:mt-24 md:mx-10 mx-0 mb-10" >
 
@@ -69,16 +79,18 @@ const ReactPage = () => {
 
                         className="flex flex-col justify-center" >
                         <div className="my-5 text-white text-2xl text-center">Hello, Pancham</div>
-                        {/* {
-                            reactCourses.map((react) => {
+                        {
+                            reactCourses.map((prop, headIndex) => {
                                 return (
-
-                                    <p className=" pl-5 my-4 pb-3 cursor-pointer border-b-2
-                                    text-white border-gray-300"key={props.topicId}
-                                        onClick={() => setVideo(props.videoURL)}>{react.topicName}</p>
+                                    <Accordion key={headIndex} heading={prop.chapterName}>
+                                        {prop.topics.map((Topic, childIndex) => {
+                                            return (
+                                                <p key={childIndex} className="w-full m-2" onClick={() => setVideo(Topic.videoURL)}>{Topic.topicName}</p>
+                                            )
+                                        })}
+                                    </Accordion>
                                 )
-                            })
-                        } */}
+                            })}
                     </motion.div>
 
                 </motion.div>
@@ -86,36 +98,55 @@ const ReactPage = () => {
                 <div className="md:hidden flex bg-white w-32 my-5 mx-5 border-4 p-3 rounded-xl text-2xl cursor-pointer z-30"
                     onClick={changer}>☰ Menu</div>
 
-                <div className="flex justify-center items-center flex-col mx-10">
+                <div className="flex justify-center items-center flex-col mx-10 w-10/12">
 
-                    <div className=" w-3/4 md:mx-auto mx-10 h-full z-10 flex justify-center border-2">
-                        <ReactPlayer controls width='100%' height="400px" url={video} />
+                    <div className=" w-full md:mx-auto mx-10 h-full z-10 flex justify-center border-2">
+
+                        <video src={video} width="100%" height="100%" controls></video>
+
                     </div>
-                    <div className="mt-10">
-                        <textarea className="w-full border border-gray-900 " rows="10" cols="100" name="comment" form="usrform" placeholder="Take notes..."></textarea>
+                    <div className="mt-10 w-auto">
+                        <div className="text-3xl font-semibold my-2">Notes</div>
+                        <div className="font-medium" >
+                            {/* Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse ullam ut
+                            repellendus animi, cumque magnam minus beatae laborum illum voluptatem,
+                            voluptatum facere necessitatibus incidunt nemo voluptates consequuntur.
+                            Quos, eveniet porro. */}
+
+                            {/* {notes} */}
+                            {/* <object data={notes} type=""></object> */}
+                            <p style={styleSec}>
+                                <embed src={notes} type="" style={style} />
+                            </p>
+
+                            {/* <iframe src={notes} frameborder="0"
+                                width="auto" height="auto"
+                            ></iframe> */}
+                        </div>
                     </div>
 
                 </div>
 
-                <div className="border-4 rounded-xl py-10 px-5 w-4/12 h-auto  border-gray-400 hidden md:block" >
+                <div className="border-4 rounded-xl py-10 px-5 w-5/12 h-auto border-gray-400 hidden md:block" >
                     {
-                        reactCourses.map((react, headIndex) => {
+                        reactCourses.map((prop, headIndex) => {
                             return (
-                                <select key={headIndex} defaultValue='heading' className='duration-200 w-full border-b-2 font-semibold p-2 text-lg' onClick={(e) => setVideo(e.target.value)}>
-                                    <option value="heading">
-                                        {react.chapterName}(Heading)
-                                    </option>
-                                    {
-                                        react.topics.map((reactTopic, childIndex) => {
-                                            return (
-                                                <option key={childIndex} value={reactTopic.videoURL}>
-                                                    {reactTopic.topicName}
-                                                </option>
-                                            )
-                                        })
-                                    }
-                                </select>
-
+                                <Accordion key={headIndex} heading={prop.chapterName}>
+                                    {prop.topics.map((Topic, childIndex) => {
+                                        const Setter = () => {
+                                            setVideo(Topic.videoURL)
+                                            setNotes(Topic.notesURL)
+                                        }
+                                        return (
+                                            <motion.p
+                                                whileTap={{ fontWeight: "bold" }}
+                                                key={childIndex} className="w-full font-medium
+                                             m-2 cursor-pointer" onClick={Setter}>
+                                                {Topic.topicName}
+                                            </motion.p>
+                                        )
+                                    })}
+                                </Accordion>
                             )
                         })}
                 </div>
