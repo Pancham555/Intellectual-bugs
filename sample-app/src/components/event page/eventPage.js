@@ -98,7 +98,7 @@ function EventPage() {
                                     <div className="m-2 text-gray-500">
                                         <ReadMoreReact
                                             text={props.description}
-                                            readMoreText={"read more Text"}
+                                            readMoreText={"...read more"}
                                         />
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@ function EventPage() {
                                     <div className="m-2 text-gray-500">
                                         <ReadMoreReact
                                             text={props.description}
-                                            readMoreText={"read more Text"}
+                                            readMoreText={"...read more "}
                                         />
                                     </div>
                                 </div>

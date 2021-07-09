@@ -4,10 +4,7 @@ import { useHistory } from 'react-router-dom'
 import './../../App.css'
 import Navbar from './../navbar/navbar'
 
-
-
-const SignIn = () => {
-
+function SignIn() {
 
 
     const history = useHistory()
@@ -15,28 +12,37 @@ const SignIn = () => {
     const [password, setPassword] = useState("")
     const [emailErr, setEmailErr] = useState({})
     const [passwordErr, setPasswordErr] = useState({})
+    const [loginSuccess, setLoginSuccess] = useState(true)
+    var crypto = require('crypto');
     const SubmitForm = (e) => {
-
         e.preventDefault()
         const isValid = validation()
         if (isValid) {
             setEmail("")
             setPassword("")
 
-            history.push('/selection')
+            // history.push('/selection')
             //comment this only when the backend is running
 
             //Sending part goes here
+            var hash = crypto.createHash('md5').update(password).digest('hex');
+            const data = {
+                emailId: email,
+                password: hash
+            }
             axios.post('https://localhost:5001/user/login',
-                // data
+                data
             )
                 .then(res => {
                     console.log(res)
-                    if (res[0].result !== null) {
-                        if (res[0].result === "False") {
-                            setLoginSuccess(res[0].message)
+                    if (res.data.result !== null) {
+                        //res.data[0].result !== null
+                        if (res.data.result === "False") {
+                            // res.data[0].result === "False"
+                            setLoginSuccess(res.data.message)
+                            setLoginSuccess(res.data.message)
                         } else {
-                            // history.push("/selection")
+                            history.push("/selection")
                             //uncomment this only when the backend is running
                         }
 
@@ -76,13 +82,8 @@ const SignIn = () => {
         setEmail("")
         setPassword("")
     }
-
-
     return (
         <>
-            {/* <Contexter.Provider value={email}>
-
-            </Contexter.Provider> */}
             <Navbar />
             <div className="flex justify-center">
                 <form onSubmit={SubmitForm} className="text-sm shadow-2xl w-11/12 md:w-5/12 h-auto mt-16 mb-2 pb-5 rounded-2xl border-4 flex justify-center flex-col items-center">
@@ -102,18 +103,18 @@ const SignIn = () => {
                         <button type="submit" className="text-xs md:text-sm border-2 border-black outline-none px-2 py-1 rounded-lg"
                         >Submit</button>
                     </div>
+
                     <div className="text-center">Didn't have an account ? <span className='text-blue-500 cursor-pointer' onClick={() => history.push('/signup')}> Sign Up </span></div>
+                    {loginSuccess !== "" ?
+                        <p>{loginSuccess}</p> : ""
+                    }
                 </form>
             </div>
         </>
     )
 }
 
-
 export default SignIn
-// export { Contexter }
-
-
 
 
 
