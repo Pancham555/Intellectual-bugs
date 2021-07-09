@@ -29,7 +29,7 @@ const ReactPage = () => {
             .then((response) => {
                 const allReact = response.data;
                 console.log(allReact)
-                console.log(allReact[0].topics[1].topicName)
+                // console.log(allReact[0].topics[1].topicName)
                 setReactCourses(allReact);
             }).catch(error => console.log(`Error : ${error}`))
     }
@@ -43,7 +43,7 @@ const ReactPage = () => {
 
     const [video, setVideo] = useState('http://localhost:5500/videos/courses/React/Introduction/introduction.mp4')
 
-    const [notes, setNotes] = useState("Your notes goes here.This is a dummy text, and it's sole purpose is to show you where your notes will be placed")
+    const [notes, setNotes] = useState("This is a dummy text.The video notes will appear here")
 
     return (
 
@@ -102,30 +102,10 @@ const ReactPage = () => {
                     </div>
                     <div className="mt-10 w-auto">
                         <div className="text-3xl font-semibold my-2">About</div>
-                        <div className="font-medium" >
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Obcaecati quis odio temporibus consequatur omnis! Necessitatibus
-                            ut aperiam obcaecati blanditiis quisquam. Laboriosam repellendus,
-                            sint dolore ab quas inventore fugiat eos repellat iure nostrum
-                            cum tempore quibusdam maiores quae ea autem, voluptates voluptatem.
-                            Nisi sint dolores ut doloremque id facere debitis velit placeat
-                            asperiores repudiandae quidem animi a laboriosam quas maiores
-                            tempore repellendus quia sequi, praesentium odio voluptas reiciendis
-                            vident nihil! Perspiciatis unde possimus totam deserunt blanditiis quas
-                            accusantium cumque odit, ipsa veritatis nostrum accusamus distinctio
-                            earum ab. Necessitatibus ducimus fugit consequatur ea debitis inventore
-                            assumenda sit laudantium temporibus animi at obcaecati, illo omnis
-
-                            {/* {notes} */}
-                            {/* <object data={notes} type=""></object> */}
-                            {/* <p style={styleSec}>
-                                <embed src={notes} type="" style={style} />
-                            </p> */}
-
-                            {/* <iframe src={notes} frameborder="0"
-                                width="auto" height="auto"
-                            ></iframe> */}
+                        <div className="font-normal" >
+                            {notes}
                         </div>
+
                     </div>
 
                 </div>
@@ -140,6 +120,7 @@ const ReactPage = () => {
                                             setVideo(Topic.videoURL)
                                             setNotes(Topic.notesURL)
                                         }
+
                                         return (
                                             <motion.p
                                                 whileTap={{ fontWeight: "bold" }}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './../../App.css'
-import Share from './../../assets/share.png'
+// import Share from './../../assets/share.png'
 import Navbar from './../navbar/navbar'
 import NavIcon from './../navbar icons/navbarIcon'
 import Accordion from './../courses page/Course components/Accordion'
@@ -9,7 +9,9 @@ import Footer from './../footer/footer'
 import { motion } from 'framer-motion'
 import { auto } from 'async'
 import axios from 'axios'
-
+import EventIcon from '@material-ui/icons/Event';
+import ShareIcon from '@material-ui/icons/Share';
+import ReadMoreReact from 'read-more-react';
 
 
 function EventPage() {
@@ -50,16 +52,18 @@ function EventPage() {
 
     const [id, setId] = useState()
 
-
-
     return (
         <div>
             <Navbar >
                 <NavIcon colorC="text-black" colorSecC='text-black font-semibold' />
             </Navbar>
             <div className="sticky top-0 left-0 right-0 bg-blue-400 flex text-center text-xl text-white">
-                <div className="w-1/2 border-r-2 py-2 cursor-pointer" onClick={() => futureEvent(true)}>Past Events</div>
-                <div className="w-1/2 border-l-2 py-2 cursor-pointer" onClick={() => futureEvent(false)}>Future Events</div>
+                <motion.div
+                    animate={pastEvent ? { backgroundColor: "white", color: "black", fontWeight: "500" } : {}}
+                    className="w-1/2 py-2 cursor-pointer" onClick={() => futureEvent(true)}>Past Events</motion.div>
+                <motion.div
+                    animate={pastEvent ? {} : { backgroundColor: "white", color: "black", fontWeight: "500" }}
+                    className="w-1/2 py-2 cursor-pointer" onClick={() => futureEvent(false)}>Future Events</motion.div>
             </div>
             <div className='flex justify-center mt-10 w-full text-base flex-wrap'>
 
@@ -68,6 +72,9 @@ function EventPage() {
                         const Booking = () => {
                             alert("Your ticket is booked")
                             //sending part goes here
+                        }
+                        const content = () => {
+                            return (<p>{props.description}</p>)
                         }
                         const Sharer = () => {
                             alert("Share this event using the link 👉 http://localhost:3000/events")
@@ -78,20 +85,24 @@ function EventPage() {
                                     <div className="flex justify-between m-2">
                                         <div className="mx-2 flex flex-col"><span>{props.eventName}</span>
                                             <div className="text-sm flex flex-col">
-                                                <span className='text-gray-500 my-1'>Started on {props.startTime}</span>
-                                                <span className='text-gray-500 my-1'>Ended on {props.endTime}</span>
+                                                <span className='my-2'><EventIcon style={{ width: "1.5rem", height: "1.5rem" }} /> {props.startTime}</span>
                                             </div>
                                         </div>
                                         <div className="font-extrabold cursor-pointer text-2xl text-gray-400 mx-2">
-                                            <img src={Share} alt="" className='w-4 h-4 my-2' onClick={Sharer} />
+                                            <ShareIcon style={{ color: "black", width: "1.35rem", height: "1.35rem" }} onClick={Sharer} />
                                         </div>
                                     </div>
 
                                     <iframe src={props.eventURL} frameBorder="0" className='w-full h-48' allowFullScreen></iframe>
 
-                                    <div className="m-2 text-gray-500">{props.description}</div>
+                                    <div className="m-2 text-gray-500">
+                                        <ReadMoreReact
+                                            text={content}
+                                            readMoreText={"read more Text"}
+                                        />
+                                    </div>
                                 </div>
-                                <div className=" mt-5 mb-2 text-gray-500 mx-5 flex justify-between">
+                                <div className=" mt-5 mb-5 text-gray-500 mx-5 flex justify-between">
                                     <div className="my-auto">Participants : {props.attendee}</div>
 
                                     <Accordion heading="Panelists">
@@ -103,7 +114,6 @@ function EventPage() {
                                     </Accordion>
 
                                 </div>
-                                <Button eventClick={Booking} />
                             </div>
                         )
                     })
@@ -112,10 +122,13 @@ function EventPage() {
 
                     futureEvents.map((props) => {
                         let add = 0
+
+                        // console.log((Date.now(props.startTime) / (1000 * 60 * 60 * 24 * 12)).toFixed(0))
                         const Booking = () => {
-                            alert("Your ticket is booked")
+                            // alert("Do you want to attend this event ?")
                             setId(props.eventId)
                             //sending part goes here
+
                         }
                         const Sharer = () => {
                             alert("Share this event using the link 👉 http://localhost:3000/events")
@@ -127,20 +140,23 @@ function EventPage() {
                                     <div className="flex justify-between m-2 relative">
                                         <div className="mx-2 flex flex-col"><span>{props.eventName}</span>
                                             <div className="text-sm flex flex-col">
-                                                <span className='text-gray-500 my-1'>Starts in {props.startTime}</span>
+                                                <span className='my-2'><EventIcon style={{ width: "1.5rem", height: "1.5rem" }} /> {props.startTime}</span>
+                                                <span className='ml-7 mb-1'>Duration: {(((Date.parse(props.endTime)) - (Date.parse(props.startTime))) / (1000 * 60 * 60)).toFixed(0)} hr</span>
                                             </div>
                                         </div>
                                         <div className="font-extrabold cursor-pointer text-2xl text-gray-500 mx-2" >
-                                            <img src={Share} alt="" className='w-4 h-4 my-2' onClick={Sharer} />
+                                            <ShareIcon style={{ color: "black", width: "1.35rem", height: "1.35rem" }} onClick={Sharer} />
                                         </div>
                                     </div>
 
-                                    {/* <div className="w-full h-44 bg-purple-600 text-white flex flex-col justify-center">
-                                        <div className="flex justify-center text-2xl">New Event Coming Soon</div>
-                                    </div> */}
                                     <img src={props.imageURL} alt="" className='w-full h-48' />
 
-                                    <div className="m-2 text-gray-500">{props.description}</div>
+                                    <div className="m-2 text-gray-500">
+                                        <ReadMoreReact
+                                            text={props.description}
+                                            readMoreText={"read more Text"}
+                                        />
+                                    </div>
                                 </div>
                                 <div className=" mt-5 mb-2 text-gray-500 mx-5 flex justify-between">
                                     <div className="my-auto">Participants : {props.attendee + add}</div>
