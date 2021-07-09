@@ -73,9 +73,9 @@ function EventPage() {
                             alert("Your ticket is booked")
                             //sending part goes here
                         }
-                        const content = () => {
-                            return (<p>{props.description}</p>)
-                        }
+                        // const content = () => {
+                        //     return (<p>{props.description}</p>)
+                        // }
                         const Sharer = () => {
                             alert("Share this event using the link 👉 http://localhost:3000/events")
                         }
@@ -97,7 +97,7 @@ function EventPage() {
 
                                     <div className="m-2 text-gray-500">
                                         <ReadMoreReact
-                                            text={content}
+                                            text={props.description}
                                             readMoreText={"read more Text"}
                                         />
                                     </div>
