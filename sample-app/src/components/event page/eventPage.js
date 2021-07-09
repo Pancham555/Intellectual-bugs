@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './../../App.css'
 import Share from './../../assets/share.png'
 import Navbar from './../navbar/navbar'
 import NavIcon from './../navbar icons/navbarIcon'
 import Accordion from './../courses page/Course components/Accordion'
+import Button from './eventButton'
 import Footer from './../footer/footer'
 import { motion } from 'framer-motion'
 import { auto } from 'async'
 import axios from 'axios'
+
+
 
 function EventPage() {
 
@@ -45,11 +48,13 @@ function EventPage() {
         }
     }, [pastEvent, events, futureEvents]);
 
+    const [id, setId] = useState()
+
 
 
     return (
         <div>
-            <Navbar>
+            <Navbar >
                 <NavIcon colorC="text-black" colorSecC='text-black font-semibold' />
             </Navbar>
             <div className="sticky top-0 left-0 right-0 bg-blue-400 flex text-center text-xl text-white">
@@ -98,12 +103,7 @@ function EventPage() {
                                     </Accordion>
 
                                 </div>
-                                <motion.div
-                                    whileTap={{ scale: 0.95 }}
-                                    transition={{ type: "tween" }}
-                                    className="bg-blue-500 text-white rounded-3xl text-center text-xl
-                                    p-2 m-5 cursor-pointer"onClick={Booking}>Attend
-                                </motion.div>
+                                <Button eventClick={Booking} />
                             </div>
                         )
                     })
@@ -114,7 +114,7 @@ function EventPage() {
                         let add = 0
                         const Booking = () => {
                             alert("Your ticket is booked")
-                            console.log(props.eventId)
+                            setId(props.eventId)
                             //sending part goes here
                         }
                         const Sharer = () => {
@@ -154,12 +154,7 @@ function EventPage() {
                                     </Accordion>
 
                                 </div>
-                                <motion.div
-                                    whileTap={{ scale: 0.95 }}
-                                    transition={{ type: "tween" }}
-                                    className="bg-blue-500 text-white rounded-3xl text-center text-xl
-                                    p-2 m-5 cursor-pointer" onClick={Booking}>Attend
-                                </motion.div>
+                                <Button eventClick={Booking} />
                             </div>
                         )
                     })

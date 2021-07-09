@@ -33,12 +33,12 @@ function App() {
         <Route exact path="/courses" component={CoursePage} />
         <Route exact path='/events' component={EventPage} />
         <Route exact path="/test" component={TestPage} />
-        <Route exact path='/courses/react' component={ReactPage} />
-        <Route exact path='/courses/angular' component={Angular} />
-        <Route exact path='/courses/csharp' component={Csharp} />
-        <Route exact path='/courses/node' component={Node} />
-        <Route exact path='/courses/blender' component={Blender} />
-        <Route exact path='/courses/mongodb' component={MongoDB} />
+        <Route exact path='/courses/1' component={ReactPage} />
+        <Route exact path='/courses/2' component={Angular} />
+        <Route exact path='/courses/6' component={Csharp} />
+        <Route exact path='/courses/3' component={Node} />
+        <Route exact path='/courses/4' component={Blender} />
+        <Route exact path='/courses/5' component={MongoDB} />
         <Route exact path='/selection' component={SelectionPage} />
         <Route exact path='/testselection' component={TestSelectionPage} />
       </Switch>
@@ -47,4 +47,5 @@ function App() {
 }
 
 export default App
+
 

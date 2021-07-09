@@ -10,17 +10,7 @@ import axios from 'axios'
 import './../../App.css'
 
 const ReactPage = () => {
-    const style = {
-        width: "36rem",
-        height: "20rem",
-        color: "red",
-        fontWeight: "bold",
-        fontSize: "2rem"
-    }
-    const styleSec = {
-        fontSize: "2rem",
-        fontWeight: "bolder"
-    }
+
     const [nav, openNav] = useState(false)
     const changer = () => {
         if (nav) {
@@ -106,18 +96,26 @@ const ReactPage = () => {
 
                     </div>
                     <div className="mt-10 w-auto">
-                        <div className="text-3xl font-semibold my-2">Notes</div>
+                        <div className="text-3xl font-semibold my-2">About</div>
                         <div className="font-medium" >
-                            {/* Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse ullam ut
-                            repellendus animi, cumque magnam minus beatae laborum illum voluptatem,
-                            voluptatum facere necessitatibus incidunt nemo voluptates consequuntur.
-                            Quos, eveniet porro. */}
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            Obcaecati quis odio temporibus consequatur omnis! Necessitatibus
+                            ut aperiam obcaecati blanditiis quisquam. Laboriosam repellendus,
+                            sint dolore ab quas inventore fugiat eos repellat iure nostrum
+                            cum tempore quibusdam maiores quae ea autem, voluptates voluptatem.
+                            Nisi sint dolores ut doloremque id facere debitis velit placeat
+                            asperiores repudiandae quidem animi a laboriosam quas maiores
+                            tempore repellendus quia sequi, praesentium odio voluptas reiciendis
+                            vident nihil! Perspiciatis unde possimus totam deserunt blanditiis quas
+                            accusantium cumque odit, ipsa veritatis nostrum accusamus distinctio
+                            earum ab. Necessitatibus ducimus fugit consequatur ea debitis inventore
+                            assumenda sit laudantium temporibus animi at obcaecati, illo omnis
 
                             {/* {notes} */}
                             {/* <object data={notes} type=""></object> */}
-                            <p style={styleSec}>
+                            {/* <p style={styleSec}>
                                 <embed src={notes} type="" style={style} />
-                            </p>
+                            </p> */}
 
                             {/* <iframe src={notes} frameborder="0"
                                 width="auto" height="auto"

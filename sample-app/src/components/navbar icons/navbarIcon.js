@@ -15,10 +15,10 @@ function navbarIcon(props) {
             openNav(true)
         }
     }
+
     return (
 
         <div className="flex justify-between w-full">
-
             <div className=" my-auto text-sm md:flex hidden font-semibold lg:text-lg text-white">
                 <Link to='/courses' className={props.colorA}>
                     <p className="p-1 mx-1 cursor-pointer">

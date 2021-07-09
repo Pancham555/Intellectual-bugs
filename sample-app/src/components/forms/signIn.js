@@ -4,7 +4,10 @@ import { useHistory } from 'react-router-dom'
 import './../../App.css'
 import Navbar from './../navbar/navbar'
 
-function SignIn() {
+
+
+const SignIn = () => {
+
 
 
     const history = useHistory()
@@ -13,6 +16,7 @@ function SignIn() {
     const [emailErr, setEmailErr] = useState({})
     const [passwordErr, setPasswordErr] = useState({})
     const SubmitForm = (e) => {
+
         e.preventDefault()
         const isValid = validation()
         if (isValid) {
@@ -29,11 +33,8 @@ function SignIn() {
                 .then(res => {
                     console.log(res)
                     if (res[0].result !== null) {
-                        //res.data[0].result !== null
                         if (res[0].result === "False") {
-                            //res.data[0].result === "False"
                             setLoginSuccess(res[0].message)
-                            //setLoginSuccess(res.data[0].message)
                         } else {
                             // history.push("/selection")
                             //uncomment this only when the backend is running
@@ -75,8 +76,13 @@ function SignIn() {
         setEmail("")
         setPassword("")
     }
+
+
     return (
         <>
+            {/* <Contexter.Provider value={email}>
+
+            </Contexter.Provider> */}
             <Navbar />
             <div className="flex justify-center">
                 <form onSubmit={SubmitForm} className="text-sm shadow-2xl w-11/12 md:w-5/12 h-auto mt-16 mb-2 pb-5 rounded-2xl border-4 flex justify-center flex-col items-center">
@@ -103,7 +109,10 @@ function SignIn() {
     )
 }
 
+
 export default SignIn
+// export { Contexter }
+
 
 
 
