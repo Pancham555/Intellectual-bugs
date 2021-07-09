@@ -87,7 +87,7 @@ function EventPage() {
                                         </div>
                                     </div>
 
-                                    <iframe src={props.eventURL} frameBorder="0" className='w-full h-44' allowFullScreen></iframe>
+                                    <iframe src={props.eventURL} frameBorder="0" className='w-full h-48' allowFullScreen></iframe>
 
                                     <div className="m-2 text-gray-500">{props.description}</div>
                                 </div>
@@ -135,9 +135,10 @@ function EventPage() {
                                         </div>
                                     </div>
 
-                                    <div className="w-full h-44 bg-purple-600 text-white flex flex-col justify-center">
+                                    {/* <div className="w-full h-44 bg-purple-600 text-white flex flex-col justify-center">
                                         <div className="flex justify-center text-2xl">New Event Coming Soon</div>
-                                    </div>
+                                    </div> */}
+                                    <img src={props.imageURL} alt="" className='w-full h-48' />
 
                                     <div className="m-2 text-gray-500">{props.description}</div>
                                 </div>

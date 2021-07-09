@@ -75,7 +75,12 @@ const ReactPage = () => {
                                     <Accordion key={headIndex} heading={prop.chapterName}>
                                         {prop.topics.map((Topic, childIndex) => {
                                             return (
-                                                <p key={childIndex} className="w-full m-2" onClick={() => setVideo(Topic.videoURL)}>{Topic.topicName}</p>
+                                                <motion.p
+                                                    whileTap={{ fontWeight: "bold" }}
+                                                    key={childIndex} className="w-full font-medium m-2"
+                                                    onClick={() => setVideo(Topic.videoURL)}>
+                                                    {Topic.topicName}
+                                                </motion.p>
                                             )
                                         })}
                                     </Accordion>
