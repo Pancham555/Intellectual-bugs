@@ -6,9 +6,12 @@ import { useHistory } from "react-router-dom"
 import NavIcon from './../navbar icons/navbarIcon'
 import Footer from './../footer/footer'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { courseNum } from './../redux/NameDisplay'
 
 function CoursesPage() {
 
+    const dispatch = useDispatch()
     const [courses, setCourses] = useState([])
 
     const getCourses = () => {
@@ -38,7 +41,8 @@ function CoursesPage() {
 
                 {courses.map((data) => {
                     const pusher = () => {
-                        history.push(`/courses/${data.courseId}`)
+                        history.push(`/courses/1`)
+                        dispatch(courseNum(data.courseId))
                     }
                     return (
                         <motion.div

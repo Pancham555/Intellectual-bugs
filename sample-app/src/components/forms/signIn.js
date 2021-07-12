@@ -3,10 +3,13 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import './../../App.css'
 import Navbar from './../navbar/navbar'
+import { useDispatch } from 'react-redux'
+import { nameDisplay } from './../redux/NameDisplay'
+import { emailsender } from './../redux/NameDisplay'
 
 function SignIn() {
 
-
+    const dispatch = useDispatch()
     const history = useHistory()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -44,6 +47,10 @@ function SignIn() {
                         } else {
                             history.push("/selection")
                             //uncomment this only when the backend is running
+                            //Dispatch part will go here
+                            dispatch(nameDisplay(res.data.name))
+                            dispatch(emailsender(email))
+                            // console.log(res.data)
                         }
 
                     }

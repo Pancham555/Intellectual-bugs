@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import notification from './../../assets/notification.png'
 import { motion } from 'framer-motion'
+import { useSelector } from 'react-redux'
 
 function navbarIcon(props) {
+    const state = useSelector(state => state.change)
     let notificationCount = 211
     let conditioner = '/events'
     const [nav, openNav] = useState(false)
@@ -29,11 +31,15 @@ function navbarIcon(props) {
                     <p className="p-1 mx-1 cursor-pointer">
                         Events</p></Link>
             </div>
-
-            <div className="md:block hidden my-auto">
-                <Link to='/'>
-                    <div className="scale-150 md:scale-100 text-white  mx-5 md:text-xl text-lg cursor-pointer border-white border-2 py-1 px-2 rounded-lg hover:text-black hover:bg-white duration-200">Logout</div>
-                </Link>
+            <div className="md:block hidden">
+                <div className="flex my-auto">
+                    <div className="my-auto">{state}</div>
+                    <div className="my-auto">
+                        <Link to='/'>
+                            <div className="scale-150 md:scale-100 text-white  mx-5 md:text-xl text-lg cursor-pointer border-white border-2 py-1 px-2 rounded-lg hover:text-black hover:bg-white duration-200">Logout</div>
+                        </Link>
+                    </div>
+                </div>
             </div>
             <div className="md:hidden block text-xl my-auto font-black cursor-pointer z-50" onClick={changer}>☰</div>
             {/* 

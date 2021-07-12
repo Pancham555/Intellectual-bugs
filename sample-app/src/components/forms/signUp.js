@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Navbar from './../navbar/navbar'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { nameDisplay } from './../redux/NameDisplay'
+import { emailsender } from './../redux/NameDisplay'
 
 function SignUp() {
 
-
+    const dispatch = useDispatch()
     const history = useHistory()
     const [user, setUser] = useState({})
     const [name, setName] = useState("")
@@ -47,6 +50,9 @@ function SignUp() {
                     } else {
                         history.push("/selection")
                         //uncomment this only when the backend is running
+                        //Dispatch part will go here
+                        dispatch(nameDisplay(name))
+                        dispatch(emailsender(email))
                     }
 
                 }

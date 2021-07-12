@@ -8,9 +8,10 @@ import Play from './../../assets/play-button.png'
 import Footer from './../footer/footer'
 import axios from 'axios'
 import './../../App.css'
+import { useSelector } from 'react-redux'
 
 const ReactPage = () => {
-
+    const state = useSelector(state => state.change2)
     const [nav, openNav] = useState(false)
     const changer = () => {
         if (nav) {
@@ -25,7 +26,7 @@ const ReactPage = () => {
     // const [num, setNum] = useState(1)
 
     const getReact = () => {
-        axios.get(`${url}course?id=${1}`)
+        axios.get(`${url}course?id=${state}`)
             .then((response) => {
                 const allReact = response.data;
                 console.log(allReact)
@@ -41,9 +42,18 @@ const ReactPage = () => {
 
     const [reactCourses, setReactCourses] = useState([]);
 
-    const [video, setVideo] = useState('http://localhost:5500/videos/courses/React/Introduction/introduction.mp4')
+    const [video, setVideo] = useState('')
 
-    const [notes, setNotes] = useState("This is a dummy text.The video notes will appear here")
+    const [notes, setNotes] = useState(`
+    This is a dummy text.The video notes will appear here. This is a dummy text.The video notes will appear here.
+    This is a dummy text.The video notes will appear here. This is a dummy text.The video notes will appear here.
+    This is a dummy text.The video notes will appear here. This is a dummy text.The video notes will appear here.
+    This is a dummy text.The video notes will appear here. This is a dummy text.The video notes will appear here.
+    This is a dummy text.The video notes will appear here. This is a dummy text.The video notes will appear here.
+    This is a dummy text.The video notes will appear here. This is a dummy text.The video notes will appear here.
+    This is a dummy text.The video notes will appear here. This is a dummy text.The video notes will appear here.
+    This is a dummy text.The video notes will appear here. This is a dummy text.The video notes will appear here.
+    `)
 
     return (
 

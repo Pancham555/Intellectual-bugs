@@ -12,10 +12,11 @@ import axios from 'axios'
 import EventIcon from '@material-ui/icons/Event';
 import ShareIcon from '@material-ui/icons/Share';
 import ReadMoreReact from 'read-more-react';
+import { useSelector } from 'react-redux'
 
 
 function EventPage() {
-
+    const state = useSelector(state => state.change3)
     const url = "https://localhost:5001/";
     const [events, setEvents] = useState([])
     const [futureEvents, setFutureEvents] = useState([])
@@ -37,6 +38,21 @@ function EventPage() {
 
     const [pastEvent, futureEvent] = useState(true);
 
+    const [id, setId] = useState()
+
+    const details = {
+        emailId: state,
+        eventId: id
+    }
+
+    const sendBookingData = () => {
+        axios.post("https://localhost:5001/event/addattendee", details)
+            .then((res) => {
+                console.log(res)
+            }).catch((err) => {
+
+            })
+    }
     useEffect(() => {
         if (pastEvent) {
             if (events.length === 0) {
@@ -48,9 +64,11 @@ function EventPage() {
             if (futureEvents.length === 0)
                 getFutureEvents();
         }
-    }, [pastEvent, events, futureEvents]);
+        sendBookingData()
+    }, [pastEvent, events, futureEvents, id]);
 
-    const [id, setId] = useState()
+
+
 
     return (
         <div>
@@ -58,12 +76,14 @@ function EventPage() {
                 <NavIcon colorC="text-black" colorSecC='text-black font-semibold' />
             </Navbar>
             <div className="sticky top-0 left-0 right-0 bg-blue-400 flex text-center text-xl text-white">
-                <motion.div
-                    animate={pastEvent ? { backgroundColor: "white", color: "black", fontWeight: "500" } : {}}
-                    className="w-1/2 py-2 cursor-pointer" onClick={() => futureEvent(true)}>Past Events</motion.div>
-                <motion.div
-                    animate={pastEvent ? {} : { backgroundColor: "white", color: "black", fontWeight: "500" }}
-                    className="w-1/2 py-2 cursor-pointer" onClick={() => futureEvent(false)}>Future Events</motion.div>
+                <div
+                    // animate={pastEvent ? { backgroundColor: "white", color: "black", fontWeight: "500" } : {}}
+                    className={`w-1/2 py-2 cursor-pointer ${pastEvent ? "bg-white text-black font-medium rounded-tr-lg" : ""}`}
+                    onClick={() => futureEvent(true)}>Past Events</div>
+                <div
+                    // animate={pastEvent ? {} : { backgroundColor: "white", color: "black", fontWeight: "500" }}
+                    className={`w-1/2 py-2 cursor-pointer ${pastEvent ? "" : "bg-white text-black font-medium rounded-tl-lg"}`}
+                    onClick={() => futureEvent(false)}>Future Events</div>
             </div>
             <div className='flex justify-center mt-10 w-full text-base flex-wrap'>
 
@@ -95,7 +115,7 @@ function EventPage() {
 
                                     <iframe src={props.eventURL} frameBorder="0" className='w-full h-48' allowFullScreen></iframe>
 
-                                    <div className="m-2 text-gray-500">
+                                    <div className="m-2 text-gray-500 cursor-pointer">
                                         <ReadMoreReact
                                             text={props.description}
                                             readMoreText={"...read more"}
@@ -127,6 +147,9 @@ function EventPage() {
                         const Booking = () => {
                             // alert("Do you want to attend this event ?")
                             setId(props.eventId)
+
+                            // sendBookingData()
+
                             //sending part goes here
 
                         }
@@ -151,7 +174,7 @@ function EventPage() {
 
                                     <img src={props.imageURL} alt="" className='w-full h-48' />
 
-                                    <div className="m-2 text-gray-500">
+                                    <div className="m-2 text-gray-500 cursor-pointer">
                                         <ReadMoreReact
                                             text={props.description}
                                             readMoreText={"...read more "}
