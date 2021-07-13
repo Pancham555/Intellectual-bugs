@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from "axios"
 import { useSelector } from 'react-redux'
+import { motion } from 'framer-motion'
+import { testIdSetting } from './../redux/NameDisplay'
+import { useDispatch } from 'react-redux'
 
 function TestPage() {
-
+    const dispatch = useDispatch()
+    const nameShow = useSelector(state => state.change)
     const statmail = useSelector(state => state.change3)
     const state = useSelector(state => state.change4)
     const stateSec = useSelector(state => state.change5)
@@ -17,13 +21,14 @@ function TestPage() {
     )
     const [num, setNum] = useState(0)
     const [answers, setAnswers] = useState('')
+    const [correctAns, setCorrectAns] = useState("")
     const [response, setResponse] = useState()
     const getQuestions = () => {
         axios.get(`https://localhost:5001/test?id=${state}&levelName=${stateSec}`)
             .then((res) => {
-                const allEvents = res.data[num];
+                const TestData = res.data[num];
                 setArrLen(res.data)
-                if (allEvents === undefined) {
+                if (TestData === undefined) {
                     setData(
                         {
                             "questionId": 0,
@@ -41,10 +46,11 @@ function TestPage() {
                             "testId": 0
                         }
                     )
-                    console.log(allEvents)
+                    // console.log(TestData)
                 }
                 else {
-                    setData(allEvents)
+                    setData(TestData)
+                    dispatch(testIdSetting(res.data[num].testId))
                 }
 
             }).catch((err) => { console.log(`Error : ${err}`) })
@@ -55,6 +61,7 @@ function TestPage() {
             .then((res) => {
                 // console.log(res)
                 setResponse(res.data.message)
+                setCorrectAns(res.data.correctAnswer)
             }).catch((err) => {
                 console.log(err)
             })
@@ -106,9 +113,8 @@ function TestPage() {
         // console.log(data.optionList.optionD)
 
     }
-    const score = () => {
-        // axios.post("")
-    }
+
+
 
     let [min, setMin] = useState(10)
     let [sec, setSec] = useState(59)
@@ -138,45 +144,90 @@ function TestPage() {
         <div className='relative top-0 left-0 right-0 bottom-0 flex justify-center'>
             {/* <div className="absolute top-6 left-20 cursor-pointer font-medium text-xl" onClick={decreaser}>⬅Back</div> */}
             <div className="w-3/4 mt-10 h-auto">
-                <div className="text-center text-xl my-2">Welcome, Pancham</div>
+                <div className="text-center text-xl my-2">Welcome, {nameShow}</div>
 
                 <div className="w-full">
                     <div className="text-center text-2xl mb-2 mx-5">Question: {num + 1}</div>
                     <div className="w-full box-content border-2 border-black h-auto relative">
-                        <div className="text-center text-xl font-semibold my-4">{data.question}</div>
-                        <div className="absolute top-0 right-0 mx-5 my-3 font-semibold">Time left: {min} :{sec < 10 ? 0 : null}{sec} </div>
+                        <div className="text-center text-xl font-semibold my-4 bg-white">{data.question}</div>
+                        <div className="absolute top-0 right-0 mx-5 my-3 font-semibold bg-white">Time left: {min} :{sec < 10 ? 0 : null}{sec} </div>
                         <div className="w-full h-auto flex flex-wrap justify-around">
-                            <div className={`border-black bg-blue-500 hover:bg-blue-400 border rounded-md md:w-5/12 w-36 my-4 py-2 p-2 cursor-pointer text-white duration-200 shadow-2xl`}
-                                // style={{ backgroundColor: "#334257" }}
-                                onClick={optionA}>{data.optionList.optionA}</div>
-                            <div className={`border-black bg-blue-500 hover:bg-blue-400 border rounded-md md:w-5/12 w-36 my-4 py-2 p-2 cursor-pointer text-white duration-200 shadow-2xl`}
-                                // style={{ backgroundColor: "#334257" }}
-                                onClick={optionB}>{data.optionList.optionB}</div>
-                            <div className={`border-black bg-blue-500 hover:bg-blue-400 border rounded-md md:w-5/12 w-36 my-4 py-2 p-2 cursor-pointer text-white duration-200 shadow-2xl`}
-                                // style={{ backgroundColor: "#334257" }}
-                                onClick={optionC}>{data.optionList.optionC}</div>
-                            <div className={`border-black bg-blue-500 hover:bg-blue-400 border rounded-md md:w-5/12 w-36 my-4 py-2 p-2 cursor-pointer text-white duration-200 shadow-2xl`}
-                                // style={{ backgroundColor: "#334257" }}
-                                onClick={optionD}>{data.optionList.optionD}</div>
+                            <div className={`border-black bg-blue-500 hover:bg-blue-400 border rounded-md md:w-5/12 w-36 my-4 cursor-pointer text-white duration-200 shadow-2xl relative`}
+                            >
+                                <motion.div
+                                    initial={{ width: 0, height: 0 }}
+                                    animate={(response === "CORRECT ANSWER!" || response === "WRONG ANSWER!") ? { width: "100%", height: "100%" } : { width: 0, height: 0 }}
+                                    transition={{ type: "tween", duration: 0.1 }}
+                                    className="absolute bg-transparent z-40 overflow-hidden">
+                                </motion.div>
+                                <div className=' px-5 py-3 z-20 ' onClick={optionA}>{data.optionList.optionA}</div>
+                            </div>
+                            <div className={`border-black bg-blue-500 hover:bg-blue-400 border rounded-md md:w-5/12 w-36 my-4 cursor-pointer text-white duration-200 shadow-2xl relative`}
+                            >
+                                <motion.div
+                                    initial={{ width: 0, height: 0 }}
+                                    animate={(response === "CORRECT ANSWER!" || response === "WRONG ANSWER!") ? { width: "100%", height: "100%" } : { width: 0, height: 0 }}
+                                    transition={{ type: "tween", duration: 0.1 }}
+                                    className="absolute bg-transparent z-40 overflow-hidden">
+                                </motion.div>
+                                <div className=' px-5 py-3 z-20 ' onClick={optionB}>{data.optionList.optionB}</div>
+                            </div>
+                            <div className={`border-black bg-blue-500 hover:bg-blue-400 border rounded-md md:w-5/12 w-36 my-4 cursor-pointer text-white duration-200 shadow-2xl relative`}
+                            >
+                                <motion.div
+                                    initial={{ width: 0, height: 0 }}
+                                    animate={(response === "CORRECT ANSWER!" || response === "WRONG ANSWER!") ? { width: "100%", height: "100%" } : { width: 0, height: 0 }}
+                                    transition={{ type: "tween", duration: 0.1 }}
+                                    className="absolute bg-transparent z-40 overflow-hidden">
+                                </motion.div>
+                                <div className=' px-5 py-3 z-20 ' onClick={optionC}>{data.optionList.optionC}</div>
+                            </div>
+                            <div className={`border-black bg-blue-500 hover:bg-blue-400 border rounded-md md:w-5/12 w-36 my-4  cursor-pointer text-white duration-200 shadow-2xl relative`}
+                            >
+                                <motion.div
+                                    initial={{ width: 0, height: 0 }}
+                                    animate={(response === "CORRECT ANSWER!" || response === "WRONG ANSWER!") ? { width: "100%", height: "100%" } : { width: 0, height: 0 }}
+                                    transition={{ type: "tween", duration: 0.1 }}
+                                    className="absolute bg-transparent z-40 overflow-hidden">
+                                </motion.div>
+                                <div className=' px-5 py-3 z-20 ' onClick={optionD}>{data.optionList.optionD}</div>
+                            </div>
                         </div>
                         <div className={`my-2 mx-12 font-medium text-lg`}>Your answer : <span className={`${response === "CORRECT ANSWER!" ? "text-green-400" : ""} ${response === "WRONG ANSWER!" ? "text-red-400" : ""}`}> {answers}</span></div>
-                        <div className={`my-2 mx-12 font-medium text-lg ${response === "CORRECT ANSWER!" ? "text-green-400" : ""} ${response === "WRONG ANSWER!" ? "text-red-400" : ""}`}>{response}</div>
+                        <div className={`my-2 mx-12 font-medium text-lg`}>
+                            <span
+                                className={`${response === "CORRECT ANSWER!" ? "text-green-400" : ""}
+                                 ${response === "WRONG ANSWER!" ? "text-red-400" : ""}`}>
+                                {response}
+                            </span>
+                            <span className='text-black ml-3 mr-2'>
+                                {response === "WRONG ANSWER!" ? "Correct answer: " : null}
+                            </span>
+                            <span className='text-green-500 mr-3'>
+                                {response === "WRONG ANSWER!" ? correctAns : null}
+                            </span>
+                        </div>
                         <div className="flex justify-around my-8">
-                            <div className="md:w-3/12 w-32 mx-5 text-center rounded-lg border-2 p-2 bg-white font-medium border-red-400 hover:border-red-500 hover:bg-red-100 duration-200 text-red-500  cursor-pointer" onClick={() => history.push('/testselection')}>Quit</div>
+                            <div className="md:w-3/12 w-32 mx-5 text-center rounded-lg border-2 p-2 bg-white font-medium border-red-400 hover:border-red-500 hover:bg-red-100 duration-200 text-red-500  cursor-pointer" onClick={() => history.push('/testselection')}>Leave</div>
                             {(!(min === 0 && sec === 0)) ?
                                 <>
-
-                                    {
-                                        data.question === "" ? null :
-                                            <>
-                                                <div className="md:w-3/12 w-32 mx-5 text-center rounded-lg border-2 p-2 bg-white font-medium border-blue-400 hover:border-blue-500 hover:bg-blue-100 duration-200 text-blue-500  cursor-pointer" onClick={increaser} >Next</div>
-                                            </>
-                                    }
-                                    {data.question === "" ? null :
+                                    {(response === "CORRECT ANSWER!" || response === "WRONG ANSWER!") ?
                                         <>
-                                            <div className="md:w-3/12 w-32 mx-5 text-center rounded-lg border-2 p-2 bg-white font-medium border-green-400 hover:border-green-500 hover:bg-green-100 duration-200 text-green-500  cursor-pointer" onClick={checker} >Check answer</div>
+                                            <div className="md:w-3/12 w-32 mx-5 text-center rounded-lg border-2 p-2 bg-white font-medium border-blue-400 hover:border-blue-500 hover:bg-blue-100 duration-200 text-blue-500  cursor-pointer" onClick={increaser} >Next</div>
+                                        </>
+                                        :
+                                        <>
+                                            {
+                                                data.question === "" ?
+                                                    null
+                                                    :
+                                                    <>
+                                                        <div className="md:w-3/12 w-32 mx-5 text-center rounded-lg border-2 p-2 bg-white font-medium border-green-400 hover:border-green-500 hover:bg-green-100 duration-200 text-green-500  cursor-pointer" onClick={checker} >Check answer</div>
+                                                    </>
+                                            }
                                         </>
                                     }
+
 
                                 </> : <h1 className='font-semibold text-center text-xl'>Opps! Time Out</h1>
                             }
@@ -186,11 +237,13 @@ function TestPage() {
                 </div>
 
                 {num === (arrLen.length - 1)
-                    && response
+                    && (response === "CORRECT ANSWER!" || response === "WRONG ANSWER!")
                     ?
-                    <div className="flex justify-center my-4">
-                        <div className="md:w-3/12 w-32 mx-5 text-center rounded-lg border-2 p-2 bg-white font-medium border-green-400 hover:border-green-500 hover:bg-green-100 duration-200 text-green-500  cursor-pointer" onClick={score}>View Score</div>
-                    </div>
+                    <Link to='/test/summary'>
+                        <div className="flex justify-center my-4">
+                            <div className="md:w-3/12 w-32 mx-5 text-center rounded-lg border-2 p-2 bg-white font-medium border-green-400 hover:border-green-500 hover:bg-green-100 duration-200 text-green-500  cursor-pointer">View Score</div>
+                        </div>
+                    </Link>
                     : null}
             </div>
         </div >

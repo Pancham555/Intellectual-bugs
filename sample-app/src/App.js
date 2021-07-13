@@ -15,6 +15,7 @@ import SelectionPage from './components/Selection Page/SelectionPage'
 import ReactPage from './components/courses page/react';
 import TestSelectionPage from './components/test page/testSelectionPage'
 import Accordion from './components/courses page/Course components/Accordion'
+import TestSummary from './components/test page/summaryPage'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route exact path='/courses/1' component={ReactPage} />
         <Route exact path='/selection' component={SelectionPage} />
         <Route exact path='/testselection' component={TestSelectionPage} />
+        <Route exact path='/test/summary' component={TestSummary} />
       </Switch>
       {/* <Accordion /> */}
     </>

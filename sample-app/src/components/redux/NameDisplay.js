@@ -127,6 +127,31 @@ const change5 = (state = initialState5, action) => {
     }
 }
 
+//The below part is action for selecting test id
+
+export const testIdSetting = (show) => {
+    return {
+        type: "TEST_ID",
+        payload: show
+    }
+}
+
+
+//The below part is reducer for selecting test id
+
+const initialState6 = 0
+
+const change6 = (state = initialState6, action) => {
+    switch (action.type) {
+
+        case "TEST_ID":
+            return action.payload
+
+        default:
+            return state
+    }
+}
+
 //THe below part is reducer combiner
 
 const combineReducer = combineReducers({
@@ -134,7 +159,8 @@ const combineReducer = combineReducers({
     change2,
     change3,
     change4,
-    change5
+    change5,
+    change6
     //any more reducers
 })
 

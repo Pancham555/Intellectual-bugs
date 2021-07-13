@@ -113,7 +113,7 @@ function SignIn() {
 
                     <div className="text-center">Didn't have an account ? <span className='text-blue-500 cursor-pointer' onClick={() => history.push('/signup')}> Sign Up </span></div>
                     {loginSuccess !== "" ?
-                        <p>{loginSuccess}</p> : ""
+                        <p className='text-red-500 my-2'>{loginSuccess}</p> : ""
                     }
                 </form>
             </div>

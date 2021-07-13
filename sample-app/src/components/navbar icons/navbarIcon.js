@@ -18,6 +18,7 @@ function navbarIcon(props) {
         }
     }
 
+
     return (
 
         <div className="flex justify-between w-full">
@@ -66,7 +67,7 @@ function navbarIcon(props) {
                     transition={{ duration: 0.6 }}
 
                     className="flex flex-col justify-center" >
-                    <div className="mt-16 md:text-2xl text-xl pb-3 text-center">Hello,Pancham</div>
+                    <div className="mt-16 md:text-2xl text-xl pb-3 text-center">Hello, {state}</div>
 
                     {/* <div className="mt-5 border-t-2 border-b-2 p-3">These are all the pages</div> */}
 
@@ -80,6 +81,9 @@ function navbarIcon(props) {
                         <p className="px-2 py-4 mx-1 cursor-pointer  text-xl">Events</p>
                     </Link>
 
+                    <Link to='/'>
+                        <div className="scale-150 md:scale-100 text-white  mx-5 md:text-xl text-lg cursor-pointer border-white border-2 py-1 px-2 rounded-lg hover:text-black hover:bg-white duration-200">Logout</div>
+                    </Link>
 
                 </motion.div>
 
