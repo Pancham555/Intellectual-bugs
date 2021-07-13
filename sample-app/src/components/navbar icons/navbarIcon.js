@@ -34,7 +34,7 @@ function navbarIcon(props) {
             </div>
             <div className="md:block hidden">
                 <div className="flex my-auto">
-                    <div className="my-auto">{state}</div>
+                    <div className="my-auto">Hello, {state}</div>
                     <div className="my-auto">
                         <Link to='/'>
                             <div className="scale-150 md:scale-100 text-white  mx-5 md:text-xl text-lg cursor-pointer border-white border-2 py-1 px-2 rounded-lg hover:text-black hover:bg-white duration-200">Logout</div>

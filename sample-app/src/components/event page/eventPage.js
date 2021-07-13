@@ -13,7 +13,7 @@ import EventIcon from '@material-ui/icons/Event';
 import ShareIcon from '@material-ui/icons/Share';
 import ReadMoreReact from 'read-more-react';
 import { useSelector } from 'react-redux'
-import EventCard from './eventCard'
+
 
 
 function EventPage() {

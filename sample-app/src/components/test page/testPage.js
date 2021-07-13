@@ -149,8 +149,11 @@ function TestPage() {
                 <div className="w-full">
                     <div className="text-center text-2xl mb-2 mx-5">Question: {num + 1}</div>
                     <div className="w-full box-content border-2 border-black h-auto relative">
-                        <div className="text-center text-xl font-semibold my-4 bg-white">{data.question}</div>
-                        <div className="absolute top-0 right-0 mx-5 my-3 font-semibold bg-white">Time left: {min} :{sec < 10 ? 0 : null}{sec} </div>
+                        <div className="w-auto flex justify-between mx-5 flex-wrap lg:justify-end">
+                            <div className="w-10/12 text-center text-xl font-semibold my-4 bg-white order-2 lg:order-1">{data.question}</div>
+                            <div className="w-auto my-3 font-semibold bg-white order-1 lg:order-2">Time left: {min} :{sec < 10 ? 0 : null}{sec} </div>
+                        </div>
+
                         <div className="w-full h-auto flex flex-wrap justify-around">
                             <div className={`border-black bg-blue-500 hover:bg-blue-400 border rounded-md md:w-5/12 w-36 my-4 cursor-pointer text-white duration-200 shadow-2xl relative`}
                             >
