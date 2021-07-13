@@ -126,7 +126,7 @@ function EventPage() {
                                     <div className="my-auto">Participants : {props.attendee}</div>
 
                                     <Accordion heading="Panelists">
-                                        {props.panelists.map((prom, num) => {
+                                        {props.attendeeModel.panelists.map((prom, num) => {
                                             return (
                                                 <div key={num} className="py-1 px-2">{prom}</div>
                                             )
@@ -186,7 +186,7 @@ function EventPage() {
 
 
                                     <Accordion heading="Panelists">
-                                        {props.panelists.map((prom, num) => {
+                                        {props.attendeeModel.panelists.map((prom, num) => {
                                             return (
                                                 <div key={num} className="py-1 px-2">{prom}</div>
                                             )

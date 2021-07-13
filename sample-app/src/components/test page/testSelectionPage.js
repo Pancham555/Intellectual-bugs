@@ -103,8 +103,8 @@ function TestSelectionPage() {
                     </div>
                     <div className="text-center my-2 font-semibold">{checker}</div>
                     <div className="flex justify-around text-center font-semibold my-6">
-                        <div className="md:w-1/3 w-40 py-2 rounded-lg border-2 border-red-500 duration-200 bg-white hover:bg-red-50 cursor-pointer" onClick={() => history.push('/selection')}>Back</div>
-                        <div className="md:w-1/3 w-40 py-2 rounded-lg border-2 border-blue-500 duration-200 bg-white hover:bg-blue-50 cursor-pointer" onClick={testProceed}>Start test</div>
+                        <div className="md:w-1/3 w-40 py-2 rounded-lg border-2 border-red-500 duration-200 bg-white hover:bg-red-100 cursor-pointer" onClick={() => history.push('/selection')}>Back</div>
+                        <div className="md:w-1/3 w-40 py-2 rounded-lg border-2 border-blue-500 duration-200 bg-white hover:bg-blue-100 cursor-pointer" onClick={testProceed}>Start test</div>
                     </div>
                 </div>
                 <img src={SideImage} alt="" className='md:w-8/12 w-full h-96 order-1 md:order-2' />
