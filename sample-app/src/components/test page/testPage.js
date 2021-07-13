@@ -130,7 +130,7 @@ function TestPage() {
                 setSec(60)
                 setMin(min - 1)
             }
-        }, 30);
+        }, 1000);
         return () => clearInterval(timer)
 
     }, [num, sec])
